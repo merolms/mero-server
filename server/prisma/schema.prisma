@@ -14,8 +14,7 @@ model User {
   lastName  String?
   password  String
   roles     String[]
-  team      Team?    @relation(fields: [teamId], references: [id])
-  teamId    String?
+  teamId    Team[]
   updatedAt DateTime @updatedAt
   username  String   @unique
 }
@@ -49,5 +48,5 @@ model Team {
   name        String?
   roles       String   @unique
   updatedAt   DateTime @updatedAt
-  users       User[]
+  user        User[]
 }

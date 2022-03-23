@@ -7,5 +7,5 @@ export type Team = {
   name: string | null;
   roles: string;
   updatedAt: Date;
-  users?: Array<User>;
+  user?: Array<User>;
 };

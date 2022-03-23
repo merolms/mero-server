@@ -15,7 +15,7 @@ import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
 import { StringFilter } from "../../util/StringFilter";
-import { TeamWhereUniqueInput } from "../../team/base/TeamWhereUniqueInput";
+import { TeamListRelationFilter } from "../../team/base/TeamListRelationFilter";
 @InputType()
 class UserWhereInput {
   @ApiProperty({
@@ -53,15 +53,15 @@ class UserWhereInput {
 
   @ApiProperty({
     required: false,
-    type: () => TeamWhereUniqueInput,
+    type: () => TeamListRelationFilter,
   })
   @ValidateNested()
-  @Type(() => TeamWhereUniqueInput)
+  @Type(() => TeamListRelationFilter)
   @IsOptional()
-  @Field(() => TeamWhereUniqueInput, {
+  @Field(() => TeamListRelationFilter, {
     nullable: true,
   })
-  team?: TeamWhereUniqueInput;
+  teamId?: TeamListRelationFilter;
 
   @ApiProperty({
     required: false,

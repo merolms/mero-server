@@ -72,11 +72,14 @@ export class UserServiceBase {
     return this.prisma.user.delete(args);
   }
 
-  async getTeam(parentId: string): Promise<Team | null> {
+  async findTeamId(
+    parentId: string,
+    args: Prisma.TeamFindManyArgs
+  ): Promise<Team[]> {
     return this.prisma.user
       .findUnique({
         where: { id: parentId },
       })
-      .team();
+      .teamId(args);
   }
 }

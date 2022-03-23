@@ -273,14 +273,14 @@ export class TeamControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Get("/:id/users")
+  @common.Get("/:id/user")
   @nestAccessControl.UseRoles({
     resource: "Team",
     action: "read",
     possession: "any",
   })
   @ApiNestedQuery(UserFindManyArgs)
-  async findManyUsers(
+  async findManyUser(
     @common.Req() request: Request,
     @common.Param() params: TeamWhereUniqueInput,
     @nestAccessControl.UserRoles() userRoles: string[]
@@ -292,7 +292,7 @@ export class TeamControllerBase {
       possession: "any",
       resource: "User",
     });
-    const results = await this.service.findUsers(params.id, {
+    const results = await this.service.findUser(params.id, {
       ...query,
       select: {
         createdAt: true,
@@ -300,13 +300,6 @@ export class TeamControllerBase {
         id: true,
         lastName: true,
         roles: true,
-
-        team: {
-          select: {
-            id: true,
-          },
-        },
-
         updatedAt: true,
         username: true,
       },
@@ -324,19 +317,19 @@ export class TeamControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Post("/:id/users")
+  @common.Post("/:id/user")
   @nestAccessControl.UseRoles({
     resource: "Team",
     action: "update",
     possession: "any",
   })
-  async createUsers(
+  async createUser(
     @common.Param() params: TeamWhereUniqueInput,
     @common.Body() body: TeamWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      users: {
+      user: {
         connect: body,
       },
     };
@@ -369,19 +362,19 @@ export class TeamControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Patch("/:id/users")
+  @common.Patch("/:id/user")
   @nestAccessControl.UseRoles({
     resource: "Team",
     action: "update",
     possession: "any",
   })
-  async updateUsers(
+  async updateUser(
     @common.Param() params: TeamWhereUniqueInput,
     @common.Body() body: UserWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      users: {
+      user: {
         set: body,
       },
     };
@@ -414,19 +407,19 @@ export class TeamControllerBase {
     defaultAuthGuard.DefaultAuthGuard,
     nestAccessControl.ACGuard
   )
-  @common.Delete("/:id/users")
+  @common.Delete("/:id/user")
   @nestAccessControl.UseRoles({
     resource: "Team",
     action: "update",
     possession: "any",
   })
-  async deleteUsers(
+  async deleteUser(
     @common.Param() params: TeamWhereUniqueInput,
     @common.Body() body: TeamWhereUniqueInput[],
     @nestAccessControl.UserRoles() userRoles: string[]
   ): Promise<void> {
     const data = {
-      users: {
+      user: {
         disconnect: body,
       },
     };

@@ -77,6 +77,6 @@ class Team {
   @ValidateNested()
   @Type(() => User)
   @IsOptional()
-  users?: Array<User>;
+  user?: Array<User>;
 }
 export { Team };

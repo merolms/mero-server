@@ -66,12 +66,12 @@ class User {
 
   @ApiProperty({
     required: false,
-    type: () => Team,
+    type: () => [Team],
   })
   @ValidateNested()
   @Type(() => Team)
   @IsOptional()
-  team?: Team | null;
+  teamId?: Array<Team>;
 
   @ApiProperty({
     required: true,

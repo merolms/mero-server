@@ -1,10 +1,10 @@
-import { TeamWhereUniqueInput } from "../team/TeamWhereUniqueInput";
+import { TeamCreateNestedManyWithoutUsersInput } from "./TeamCreateNestedManyWithoutUsersInput";
 
 export type UserCreateInput = {
   firstName?: string | null;
   lastName?: string | null;
   password: string;
   roles: Array<string>;
-  team?: TeamWhereUniqueInput | null;
+  teamId?: TeamCreateNestedManyWithoutUsersInput;
   username: string;
 };

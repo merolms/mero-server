@@ -1,11 +1,11 @@
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
-import { TeamWhereUniqueInput } from "../team/TeamWhereUniqueInput";
+import { TeamListRelationFilter } from "../team/TeamListRelationFilter";
 
 export type UserWhereInput = {
   firstName?: StringNullableFilter;
   id?: StringFilter;
   lastName?: StringNullableFilter;
-  team?: TeamWhereUniqueInput;
+  teamId?: TeamListRelationFilter;
   username?: StringFilter;
 };

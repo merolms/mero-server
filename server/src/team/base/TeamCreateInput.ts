@@ -56,6 +56,6 @@ class TeamCreateInput {
   @Field(() => UserCreateNestedManyWithoutTeamsInput, {
     nullable: true,
   })
-  users?: UserCreateNestedManyWithoutTeamsInput;
+  user?: UserCreateNestedManyWithoutTeamsInput;
 }
 export { TeamCreateInput };

@@ -6,7 +6,7 @@ export type User = {
   id: string;
   lastName: string | null;
   roles: Array<string>;
-  team?: Team | null;
+  teamId?: Array<Team>;
   updatedAt: Date;
   username: string;
 };

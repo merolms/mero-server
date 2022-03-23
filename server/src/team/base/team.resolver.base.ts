@@ -210,7 +210,7 @@ export class TeamResolverBase {
     action: "read",
     possession: "any",
   })
-  async users(
+  async user(
     @graphql.Parent() parent: Team,
     @graphql.Args() args: UserFindManyArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
@@ -221,7 +221,7 @@ export class TeamResolverBase {
       possession: "any",
       resource: "User",
     });
-    const results = await this.service.findUsers(parent.id, args);
+    const results = await this.service.findUser(parent.id, args);
 
     if (!results) {
       return [];

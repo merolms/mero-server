@@ -47,7 +47,7 @@ export class TeamServiceBase {
     return this.prisma.team.delete(args);
   }
 
-  async findUsers(
+  async findUser(
     parentId: string,
     args: Prisma.UserFindManyArgs
   ): Promise<User[]> {
@@ -55,6 +55,6 @@ export class TeamServiceBase {
       .findUnique({
         where: { id: parentId },
       })
-      .users(args);
+      .user(args);
   }
 }

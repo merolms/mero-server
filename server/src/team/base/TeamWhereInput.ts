@@ -72,6 +72,6 @@ class TeamWhereInput {
   @Field(() => UserListRelationFilter, {
     nullable: true,
   })
-  users?: UserListRelationFilter;
+  user?: UserListRelationFilter;
 }
 export { TeamWhereInput };

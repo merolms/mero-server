@@ -7,5 +7,5 @@ export type TeamWhereInput = {
   id?: StringFilter;
   name?: StringNullableFilter;
   roles?: StringFilter;
-  users?: UserListRelationFilter;
+  user?: UserListRelationFilter;
 };

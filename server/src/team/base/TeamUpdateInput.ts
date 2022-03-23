@@ -59,6 +59,6 @@ class TeamUpdateInput {
   @Field(() => UserUpdateManyWithoutTeamsInput, {
     nullable: true,
   })
-  users?: UserUpdateManyWithoutTeamsInput;
+  user?: UserUpdateManyWithoutTeamsInput;
 }
 export { TeamUpdateInput };

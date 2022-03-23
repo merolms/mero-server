@@ -25,6 +25,7 @@ import { DeleteUserArgs } from "./DeleteUserArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
+import { TeamFindManyArgs } from "../../team/base/TeamFindManyArgs";
 import { Team } from "../../team/base/Team";
 import { UserService } from "../user.service";
 
@@ -132,15 +133,7 @@ export class UserResolverBase {
     // @ts-ignore
     return await this.service.create({
       ...args,
-      data: {
-        ...args.data,
-
-        team: args.data.team
-          ? {
-              connect: args.data.team,
-            }
-          : undefined,
-      },
+      data: args.data,
     });
   }
 
@@ -179,15 +172,7 @@ export class UserResolverBase {
       // @ts-ignore
       return await this.service.update({
         ...args,
-        data: {
-          ...args.data,
-
-          team: args.data.team
-            ? {
-                connect: args.data.team,
-              }
-            : undefined,
-        },
+        data: args.data,
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -219,27 +204,29 @@ export class UserResolverBase {
     }
   }
 
-  @graphql.ResolveField(() => Team, { nullable: true })
+  @graphql.ResolveField(() => [Team])
   @nestAccessControl.UseRoles({
     resource: "User",
     action: "read",
     possession: "any",
   })
-  async team(
+  async teamId(
     @graphql.Parent() parent: User,
+    @graphql.Args() args: TeamFindManyArgs,
     @gqlUserRoles.UserRoles() userRoles: string[]
-  ): Promise<Team | null> {
+  ): Promise<Team[]> {
     const permission = this.rolesBuilder.permission({
       role: userRoles,
       action: "read",
       possession: "any",
       resource: "Team",
     });
-    const result = await this.service.getTeam(parent.id);
+    const results = await this.service.findTeamId(parent.id, args);
 
-    if (!result) {
-      return null;
+    if (!results) {
+      return [];
     }
-    return permission.filter(result);
+
+    return results.map((result) => permission.filter(result));
   }
 }
